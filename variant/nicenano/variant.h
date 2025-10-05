@@ -134,6 +134,59 @@ static const uint8_t SCK  = PIN_SPI_SCK ;
 #define EXTERNAL_FLASH_DEVICES   GD25Q16C
 #define EXTERNAL_FLASH_USE_QSPI
 
+#define PIN_P0_BASE 0
+#define PIN_P1_BASE 32
+
+#define PIN_P0_00 (PIN_P0_BASE)
+#define PIN_P0_01 (PIN_P0_BASE+1)
+#define PIN_P0_02 (PIN_P0_BASE+2)
+#define PIN_P0_03 (PIN_P0_BASE+3)
+#define PIN_P0_04 (PIN_P0_BASE+4)
+#define PIN_P0_05 (PIN_P0_BASE+5)
+#define PIN_P0_06 (PIN_P0_BASE+6)
+#define PIN_P0_07 (PIN_P0_BASE+7)
+#define PIN_P0_08 (PIN_P0_BASE+8)
+#define PIN_P0_09 (PIN_P0_BASE+9)
+#define PIN_P0_10 (PIN_P0_BASE+10)
+#define PIN_P0_11 (PIN_P0_BASE+11)
+#define PIN_P0_12 (PIN_P0_BASE+12)
+#define PIN_P0_13 (PIN_P0_BASE+13)
+#define PIN_P0_14 (PIN_P0_BASE+14)
+#define PIN_P0_15 (PIN_P0_BASE+15)
+#define PIN_P0_16 (PIN_P0_BASE+16)
+#define PIN_P0_17 (PIN_P0_BASE+17)
+#define PIN_P0_18 (PIN_P0_BASE+18)
+#define PIN_P0_19 (PIN_P0_BASE+19)
+#define PIN_P0_20 (PIN_P0_BASE+20)
+#define PIN_P0_21 (PIN_P0_BASE+21)
+#define PIN_P0_22 (PIN_P0_BASE+22)
+#define PIN_P0_23 (PIN_P0_BASE+23)
+#define PIN_P0_24 (PIN_P0_BASE+24)
+#define PIN_P0_25 (PIN_P0_BASE+25)
+#define PIN_P0_26 (PIN_P0_BASE+26)
+#define PIN_P0_27 (PIN_P0_BASE+27)
+#define PIN_P0_28 (PIN_P0_BASE+28)
+#define PIN_P0_29 (PIN_P0_BASE+29)
+#define PIN_P0_30 (PIN_P0_BASE+30)
+#define PIN_P0_31 (PIN_P0_BASE+31)
+
+#define PIN_P1_00 (PIN_P1_BASE)
+#define PIN_P1_01 (PIN_P1_BASE+1)
+#define PIN_P1_02 (PIN_P1_BASE+2)
+#define PIN_P1_03 (PIN_P1_BASE+3)
+#define PIN_P1_04 (PIN_P1_BASE+4)
+#define PIN_P1_05 (PIN_P1_BASE+5)
+#define PIN_P1_06 (PIN_P1_BASE+6)
+#define PIN_P1_07 (PIN_P1_BASE+7)
+#define PIN_P1_08 (PIN_P1_BASE+8)
+#define PIN_P1_09 (PIN_P1_BASE+9)
+#define PIN_P1_10 (PIN_P1_BASE+10)
+#define PIN_P1_11 (PIN_P1_BASE+11)
+#define PIN_P1_12 (PIN_P1_BASE+12)
+#define PIN_P1_13 (PIN_P1_BASE+13)
+#define PIN_P1_14 (PIN_P1_BASE+14)
+#define PIN_P1_15 (PIN_P1_BASE+15)
+
 #ifdef __cplusplus
 }
 #endif

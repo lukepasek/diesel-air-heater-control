@@ -46,12 +46,27 @@ volatile int bitTimerCount = 0;
 
   #include <Adafruit_TinyUSB.h>
   #include "NRF52TimerInterrupt.h"
+  #include <SPI.h>
+  #include <GxEPD2_BW.h>
+  #include <Fonts/FreeSans12pt7b.h>
 
   #define LED_PIN LED_BUILTIN // P0.15
   #define OUT_PIN (10) // P0.10
   #define BW_SERIAL_PIN (9) // P0.09
 
+  #define BUSY_PIN   (PIN_P0_17) // purple P1.06 
+  #define RES_PIN    (PIN_P0_20) //orange P1.04
+  #define DC_PIN     (PIN_P0_22) // white P0.11
+  #define CS_PIN     (PIN_P0_24) // blue (SS) P1.00
+  #define SCL_PIN    (PIN_P1_00) // green P0.24 (SCK)
+  #define SDA_PIN    (PIN_P0_11) // yellow P0.22 (MOSI)
+
+  SPIClass spi = SPIClass(NRF_SPIM3, -1, SCL_PIN, SDA_PIN);
+  SPISettings spiSettings(3200000, MSBFIRST, SPI_MODE0);
+
   NRF52Timer ITimer0(NRF_TIMER_4);
+
+  GxEPD2_BW<GxEPD2_154_D67, GxEPD2_154_D67::HEIGHT> display(GxEPD2_154_D67(CS_PIN, DC_PIN, RES_PIN, BUSY_PIN)); // GDEH0154D67
 
   void initSerialBitTimer() {
   }
@@ -71,6 +86,28 @@ volatile int bitTimerCount = 0;
   void inline detachSerialPinEdgeInterrupt() {
     detachInterrupt(BW_SERIAL_PIN);
   }
+
+  void initDisplay() {
+    spi.begin();
+
+    display.epd2.selectSPI(spi, spiSettings);
+    display.init(115200, true, 2, false); // USE THIS for Waveshare boards with "clever" reset circuit, 2ms reset pulse
+    // display.setRotation(0);
+    display.fillScreen(GxEPD_WHITE);
+    display.clearScreen();
+    // display.display(true);
+    display.setTextColor(GxEPD_BLACK);
+    display.setFont(&FreeSans12pt7b);
+    display.setCursor(0,25);
+    display.print("Air heater controller");
+    // display.println();
+    // display.print("Test line 2");
+    // display.println();
+    // display.print("Test line 3");
+    // display.println();
+    display.display(true);
+  }
+
 #endif
 
 uint8_t rx_frame_buffer[6];
@@ -110,7 +147,8 @@ void IRAM_ATTR serialBitTimerISR()
 }
 #endif
 
-void serialPinEdgeHandler() {
+void serialPinEdgeHandler() 
+{
   if (digitalRead(BW_SERIAL_PIN))
   {
     restartSerialBitTimer();
@@ -130,7 +168,8 @@ void serialPinEdgeHandler() {
   }
 }
 
-void serialBitTimerHandler() {
+void serialBitTimerHandler()
+{
   int rx_pin_state = digitalRead(BW_SERIAL_PIN);
   int rx_sample_ptr = rx_sample_cnt % 6;
   bool rx_frame_error = false;
@@ -183,6 +222,8 @@ void setup()
   pinMode(OUT_PIN, OUTPUT);
   pinMode(LED_PIN, OUTPUT);
   pinMode(BW_SERIAL_PIN, INPUT_PULLUP);
+
+  initDisplay();
 
   initSerialBitTimer();
 

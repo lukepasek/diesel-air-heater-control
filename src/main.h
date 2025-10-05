@@ -8,3 +8,5 @@ void serialPinEdgeHandler();
 void serialBitTimerHandler();
 
 void led_on(bool);
+
+void initDisplay();
